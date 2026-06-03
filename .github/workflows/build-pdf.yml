@@ -1,0 +1,41 @@
+name: Build Beamer PDF
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y \
+            texlive-xetex \
+            texlive-latex-extra \
+            texlive-fonts-extra \
+            texlive-science \
+            texlive-pictures \
+            lmodern
+
+      - name: Compile LaTeX (pass 1)
+        run: |
+          xelatex -interaction=nonstopmode -halt-on-error \
+            ai_biomedical_critical_systems_beamer.tex
+
+      - name: Compile LaTeX (pass 2 — resolve cross-references)
+        run: |
+          xelatex -interaction=nonstopmode -halt-on-error \
+            ai_biomedical_critical_systems_beamer.tex
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: beamer-pdf
+          path: ai_biomedical_critical_systems_beamer.pdf
