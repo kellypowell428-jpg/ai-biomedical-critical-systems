@@ -1,6 +1,6 @@
 # AI for Biomedical Systems & Critical Systems
 
-A Beamer presentation covering safety, reliability, regulation, and deployment patterns for AI in biomedical and critical systems — built for the UAB Heersink School of Medicine.
+A Beamer presentation covering safety, reliability, regulation, and deployment patterns for AI in biomedical and critical systems.
 
 ## Files
 
